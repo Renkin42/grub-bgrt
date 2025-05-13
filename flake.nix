@@ -21,8 +21,7 @@
 	    name = "grub-bgrt";
 	    src = "${self}";
 	    buildInputs = [ pkgs.imagemagick ];
-	    builder = "${pkgs.bash}/bin/bash";
-	    args = [ ./install.sh -d ${out} ];
+	    installPhase = "bash .install.sh -d ${out}";
 	  };
 	in
 	rec {

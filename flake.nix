@@ -19,7 +19,7 @@
 	  cfg = boot.loader.grub-bgrt;
 	  grub-bgrt = pkgs.stdenv.mkDerivation {
 	    name = "grub-bgrt";
-	    src = ${self};
+	    src = "${self}";
 	    buildInputs = [ pkgs.imagemagick ];
 	    builder = "${pkgs.bash}/bin/bash";
 	    args = [ ./install.sh -d ${out} ];

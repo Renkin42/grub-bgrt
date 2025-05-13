@@ -16,7 +16,7 @@
     rec {
       nixosModules.default = { config, ... }:
         let
-	  cfg = boot.loader.grub-bgrt;
+	  cfg = config.boot.loader.grub-bgrt;
 	  grub-bgrt = pkgs.stdenv.mkDerivation {
 	    name = "grub-bgrt";
 	    src = "${self}";

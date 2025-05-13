@@ -1,9 +1,19 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Configurables
 GRUB_DIR=/boot/grub/themes
 GRUB_THEME=grub-bgrt
 FONTSIZE=24 # See README.md
+
+while getopts "d:" option; do
+	case $option in
+		d)
+			GRUB_DIR=$OPTARG;;
+		\?)
+			echo "Error: Invalid option"
+         		exit;;
+	esac
+done
 
 # Sanity Checks
 if [[ ! -r /sys/firmware/acpi/bgrt/image ]]; then

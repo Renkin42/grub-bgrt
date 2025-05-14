@@ -25,7 +25,9 @@ To change the font in the theme, try something like:
 
 Nix installation requires flake support. See [the NixOS Wiki](https://wiki.nixos.org/wiki/Flakes) for more 
 information. Once you have enableed flake support add the following to your configuration:
-```flake.nix  
+
+flake.nix
+```nix  
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     grub-bgrt.url = "github:Renkin42/grub-bgrt";
@@ -38,7 +40,8 @@ information. Once you have enableed flake support add the following to your conf
     ];
 ```
 
-```configuration.nix
+configuration.nix
+```nix
   boot.loader.grub.enable = true;
   boot.loader.grub.efiSupport = true;
   boot.loader.grub.device = "nodev";

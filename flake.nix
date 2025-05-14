@@ -24,7 +24,7 @@
 	    installPhase = ''
 	      bash ./install.sh \
 	        -b ${cfg.bgrtDir} \
-		-d $out"
+	        -d $out
 	    '';
 	  };
 	in

@@ -48,6 +48,7 @@
 	  config = mkIf cfg.enable (mkMerge [{
 	    environment.systemPackages = [ grub-bgrt ];
 	    boot.loader.grub.theme = "${grub-bgrt}/grub-bgrt/";
+	    boot.loader.grub.splashImage = "${grub-bgrt}/grub-bgrt/background-black.png";
 	  }]);
 	};
     };

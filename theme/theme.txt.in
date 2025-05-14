@@ -4,7 +4,7 @@
 #general settings
 title-text: ""
 desktop-color: "#000"
-desktop-image: "background.png"
+desktop-image: "background-black.png"
 
 # Terminal is low and wide
 terminal-font: "DejaVu Sans Mono Regular 12"

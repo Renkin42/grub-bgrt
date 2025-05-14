@@ -23,9 +23,7 @@
 	    buildInputs = [ pkgs.imagemagick ];
 	    installPhase = ''
 	      bash ./install.sh \
-	        -i ${/sys/firmware/acpi/bgrt/image} \
-	        -x ${/sys/firmware/acpi/bgrt/xoffset} \
-	        -y ${/sys/firmware/acpi/bgrt/yoffset} \
+	        -b ${cfg.bgrtDir} \
 		-d $out"
 	    '';
 	  };
@@ -38,6 +36,12 @@
 		example = true;
 		type = types.bool;
 		description = "Enable grub bgrt theme";
+	      };
+	      bgrtDir = mkOption {
+	        type = types.either types.path (types.strMatching "^#[0-9]{6}$");
+		defaultText = "";
+		example = "./bgrt";
+		description = "Path to a copy of /sys/firmware/acpi/bgrt/.";
 	      };
 	    };
 	  };

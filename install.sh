@@ -4,14 +4,20 @@
 GRUB_DIR=/boot/grub/themes
 GRUB_THEME=grub-bgrt
 FONTSIZE=24 # See README.md
-BGRT_DIR=/sys/firmware/acpi/bgrt
+BGRT_IMG=/sys/firmware/acpi/bgrt/image
+BGRT_XOFFSET=/sys/firmware/acpi/bgrt/xoffset
+BGRT_YOFFSET=/sys/firmware/acpi/bgrt/yoffset
 
-while getopts "b:d:" option; do
+while getopts "d:i:x:y:" option; do
 	case $option in
-		b)
-			BGRT_DIR=$OPTARG;;
 		d)
 			GRUB_DIR=$OPTARG;;
+		i)
+			BGRT_IMG=$OPTARG;;
+		x)
+			BGRT_XOFFSET=$OPTARG;;
+		y)
+			BGRT_YOFFSET=$OPTARG;;
 		\?)
 			echo "Error: Invalid option"
          		exit;;
@@ -19,7 +25,7 @@ while getopts "b:d:" option; do
 done
 
 # Sanity Checks
-if [[ ! -r ${BGRT_DIR}/image ]]; then
+if [[ ! -r ${BGRT_IMG} ]]; then
 	echo "Sorry, I can't read /sys/firmware/acpi/bgrt/image"
 	echo "Your system is not suitable for this theme"
 	exit 1
@@ -30,12 +36,12 @@ command -v install >/dev/null 2>&1 || { echo >&2 "I require install (from coreut
 command -v awk >/dev/null 2>&1 || { echo >&2 "I require awk but it's not installed.  Aborting."; exit 1; }
 
 # OK. Convert the image to PNG (grub doesn't support BMPs)
-convert ${BGRT_DIR}/image PNG24:theme/bgrt.png
+convert ${BGRT_IMG} PNG24:theme/bgrt.png
 
 # Replace the placeholders with the image offsets
 < theme/theme.txt.in awk \
-	-v BGRTLEFT=$(<${BGRT_DIR}/xoffset) \
-	-v BGRTTOP=$(<${BGRT_DIR}/yoffset) \
+	-v BGRTLEFT=$(<${BGRT_XOFFSET}) \
+	-v BGRTTOP=$(<${BGRT_YOFFFSET}) \
 	'{gsub (/\$BGRTLEFT\$/, BGRTLEFT);
 	  gsub (/\$BGRTTOP\$/, BGRTTOP);
 	  print}' > theme/theme.txt

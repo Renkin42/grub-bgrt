@@ -21,7 +21,13 @@
 	    name = "grub-bgrt";
 	    src = "${self}";
 	    buildInputs = [ pkgs.imagemagick ];
-	    installPhase = "bash ./install.sh -b ${/sys/firmware/acpi/bgrt} -d $out";
+	    installPhase = ''
+	      bash ./install.sh \
+	        -i ${/sys/firmware/acpi/bgrt/image} \
+	        -x ${/sys/firmware/acpi/bgrt/xoffset} \
+	        -y ${/sys/firmware/acpi/bgrt/yoffset} \
+		-d $out"
+	    '';
 	  };
 	in
 	rec {
